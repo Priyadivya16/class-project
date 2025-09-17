@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 8px 0 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .gender {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background: #005fa3;
+    }
+    .result {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get submitted values
+    $name     = htmlspecialchars($_POST['name']);
+    $email    = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']); // (Note: production-la hash pannunga)
+    $gender   = htmlspecialchars($_POST['gender']);
+    $course   = htmlspecialchars($_POST['course']);
+    ?>
+    
+    <div class="result">
+      <h2>Registration Successful!</h2>
+      <p><strong>Name:</strong> <?= $name ?></p>
+      <p><strong>Email:</strong> <?= $email ?></p>
+      <p><strong>Password:</strong> <?= $password ?></p>
+      <p><strong>Gender:</strong> <?= $gender ?></p>
+      <p><strong>Course:</strong> <?= $course ?></p>
+      <p><a href="registration.php">Back to Form</a></p>
+    </div>
+
+    <?php
+} else {
+    // Show form
+    ?>
+    <div class="form-container">
+      <h2>Registration Form</h2>
+      <form action="" method="post">
+        <label>Full Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" required>
+
+        <label>Gender:</label>
+        <div class="gender">
+          <label><input type="radio" name="gender" value="Male" required> Male</label>
+          <label><input type="radio" name="gender" value="Female" required> Female</label>
+        </div>
+
+        <label>Course:</label>
+        <select name="course" required>
+          <option value="">--Select--</option>
+          <option value="BCA">BCA</option>
+          <option value="B.Sc IT">B.Sc IT</option>
+          <option value="MCA">MCA</option>
+        </select>
+
+        <button type="submit" class="btn">Register</button>
+      </form>
+    </div>
+    <?php
+}
+?>
+
+</body>
+</html>
+
+
