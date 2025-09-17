@@ -1,0 +1,96 @@
+<?php
+session_start();
+
+// Dummy username & password
+$valid_username = "admin";
+$valid_password = "12345";
+
+// Logout button pressed
+if (isset($_POST['logout'])) {
+    session_destroy();
+    header("Location: login1.php");
+    exit();
+}
+
+// Login form submitted
+if (isset($_POST['submit'])) {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    if (empty($username) || empty($password)) {
+        $error = "⚠️ All fields are required!";
+    } elseif ($username === $valid_username && $password === $valid_password) {
+        $_SESSION['user'] = $username;
+        header("Location: login1.php"); // Redirect to welcome page
+        exit();
+    } else {
+        $error = "❌ Invalid Username or Password!";
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      width: 350px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px gray;
+      text-align: center;
+    }
+    h2 {
+      color: #333;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .btn {
+      background: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 95%;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .error { color: red; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <?php if (isset($_SESSION['user'])): ?>
+        <h2>🎉 Welcome, <?php echo $_SESSION['user']; ?>!</h2>
+        <form method="post">
+            <input type="submit" name="logout" value="Logout" class="btn">
+        </form>
+    <?php else: ?>
+        <h2>Login</h2>
+        <?php if (!empty($error)) echo "<div class='error'>$error</div>"; ?>
+        <form method="post">
+          <input type="text" name="username" placeholder="Enter Username">
+          <input type="password" name="password" placeholder="Enter Password">
+          <input type="submit" name="submit" value="Login" class="btn">
+        </form>
+    <?php endif; ?>
+  </div>
+</body>
+</html>
