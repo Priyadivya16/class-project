@@ -1,0 +1,27 @@
+<?php
+$text = "Welcome to PHP Programming";
+
+// Convert to uppercase
+echo "Uppercase: " . strtoupper($text) . "<br>";
+
+// Convert to lowercase
+echo "Lowercase: " . strtolower($text) . "<br>";
+
+// String length
+echo "Length of string: " . strlen($text) . "<br>";
+
+// Reverse string
+echo "Reversed: " . strrev($text) . "<br>";
+
+// Word count
+echo "Word count: " . str_word_count($text) . "<br>";
+
+// Replace word
+echo "Replace 'PHP' with 'Web': " . str_replace("PHP", "Web", $text) . "<br>";
+
+// Extract substring
+echo "Substring (first 7 chars): " . substr($text, 0, 7) . "<br>";
+?>
+
+ 
+
