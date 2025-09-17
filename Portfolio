@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Portfolio</title>
+</head>
+<body>
+
+  <h1 align="center">My Portfolio</h1>
+  <hr>
+
+  <h2>About Me</h2>
+  <p>Hello! I am a student and beginner web developer. I enjoy learning HTML, CSS, and PHP.</p>
+
+  <h2>Education</h2>
+  <ul>
+    <li>B.Sc. Computer Science (2023 – 2026)</li>
+    <li>Higher Secondary School – Completed</li>
+  </ul>
+
+  <h2>Projects</h2>
+  <ol>
+    <li>Personal Portfolio Website</li>
+    <li>Hotel Menu Design</li>
+    <li>Student Grade Calculation</li>
+  </ol>
+ <h2>Skills</h2>
+  <ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>PHP & MySQL</li>
+  </ul>
+ <h2>Contact</h2>
+  <p>Email: youremail@example.com</p>
+  <p>Phone: +91 98765 43210</p>
+<hr>
+  <p align="center">© 2025 My Portfolio</p>
+
+</body>
+</html>
+
