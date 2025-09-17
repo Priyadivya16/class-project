@@ -1,0 +1,76 @@
+<?php
+// ---------------- PHP PART ---------------- //
+$inventory = [
+    "Pen" => 10,
+    "Book" => 5,
+    "Pencil" => 15
+];
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $item = $_POST['item'];
+    $qty = intval($_POST['qty']);
+
+    if (isset($inventory[$item])) {
+        $inventory[$item] += $qty; // update stock
+    } else {
+        $inventory[$item] = $qty; // new item
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory Management</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f4f9; margin:20px; }
+    h2 { text-align:center; color:#333; }
+    table { width:60%; margin:20px auto; border-collapse:collapse; background:#fff; }
+    th, td { padding:10px; border:1px solid #ccc; text-align:center; }
+    th { background:#333; color:#fff; }
+    form { width:60%; margin:20px auto; background:#fff; padding:15px; border-radius:6px;
+           box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+    input[type="text"], input[type="number"] {
+        padding:8px; width:45%; margin:5px; border:1px solid #ccc; border-radius:4px;
+    }
+    input[type="submit"] {
+        background:#28a745; color:white; padding:10px 20px;
+        border:none; border-radius:5px; cursor:pointer;
+    }
+    input[type="submit"]:hover { background:#218838; }
+  </style>
+  <script>
+    function confirmAdd() {
+      return confirm("Are you sure you want to update the inventory?");
+    }
+  </script>
+</head>
+<body>
+
+<h2>Inventory Management System</h2>
+
+<!-- ---------- HTML FORM + JS ---------- -->
+<form method="post" onsubmit="return confirmAdd();">
+  <input type="text" name="item" placeholder="Enter item name" required>
+  <input type="number" name="qty" placeholder="Enter quantity" required>
+  <input type="submit" value="Update Inventory">
+</form>
+
+<!-- ---------- INVENTORY TABLE ---------- -->
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Quantity</th>
+  </tr>
+  <?php foreach ($inventory as $item => $qty) { ?>
+    <tr>
+      <td><?php echo $item; ?></td>
+      <td><?php echo $qty; ?></td>
+    </tr>
+  <?php } ?>
+</table>
+
+</body>
+</html>
+
