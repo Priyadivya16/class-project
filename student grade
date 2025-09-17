@@ -1,0 +1,120 @@
+DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Grade Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background: #005fa3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9fafb;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Student Grade Calculator</h2>
+
+  <?php
+  // Function to calculate grade
+  function calculateGrade($average) {
+      if ($average >= 90) return "Excellent (A+)";
+      elseif ($average >= 75) return "Good (A)";
+      elseif ($average >= 60) return "Pass (B)";
+      else return "Fail (C)";
+  }
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      // Array of subjects
+      $subjects = ["Maths", "Science", "English", "Computer", "History"];
+      $marks = [];
+
+      foreach ($subjects as $subject) {
+          $marks[$subject] = (int)$_POST[$subject];
+      }
+
+      $total = array_sum($marks);
+      $average = $total / count($marks);
+      $grade = calculateGrade($average);
+
+      echo "<div class='result'>";
+      echo "<h3>Result</h3>";
+      echo "<p><strong>Total Marks:</strong> $total</p>";
+      echo "<p><strong>Average:</strong> " . number_format($average, 2) . "</p>";
+      echo "<p><strong>Grade:</strong> $grade</p>";
+      echo "</div>";
+  }
+  ?>
+
+  <form method="post" action="">
+    <label>Maths:</label>
+    <input type="number" name="Maths" required>
+
+    <label>Science:</label>
+    <input type="number" name="Science" required>
+
+    <label>English:</label>
+    <input type="number" name="English" required>
+
+    <label>Computer:</label>
+    <input type="number" name="Computer" required>
+
+    <label>History:</label>
+    <input type="number" name="History" required>
+
+    <button type="submit" class="btn">Calculate Grade</button>
+  </form>
+</div>
+
+</body>
+</html>
+ 
+
